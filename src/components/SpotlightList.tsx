@@ -1,33 +1,45 @@
 import type Character from '@/model/character.ts';
-import {Input} from '@/components/ui/input.tsx';
+import CharacterCard from '@/components/CharacterCard.tsx';
+import {useColors} from '@/lib/hooks/useColors.ts';
 
 interface SpotlightListProps {
+    prefix: string;
     characters: Character[];
     setCharacters: (newCharacters: Character[]) => void;
 }
 
-export default function SpotlightList({characters, setCharacters}: SpotlightListProps) {
+export default function SpotlightList({prefix, characters, setCharacters}: SpotlightListProps) {
+    const {getNextColor} = useColors();
+
     function createCharacter() {
-        console.log('SpotlightList create');
         setCharacters([...characters, {
             id: crypto.randomUUID(),
-            name: 'Petar Petrov',
-            color: 'blue'
+            name: prefix + ' ' + (characters.length + 1),
+            color: getNextColor(),
         }]);
     }
 
-    function updateCreature(creature: Character, value: string) {
+    function spotlightCharacter(characterId: string) {
+        const charactersCopy = [...characters];
+        charactersCopy.sort((a, b) => a.id === characterId ? 1 : b.id === characterId ? -1 : 0);
+        setCharacters(charactersCopy);
+    }
+
+    function updateCharacter(characterId: string, value: string) {
         const updatedCharacters = [...characters];
-        updatedCharacters.find((c) => c.id === creature.id)!.name = value;
+        updatedCharacters.find((c) => c.id === characterId)!.name = value;
+        setCharacters(updatedCharacters);
+    }
+
+    function removeCharacter(characterId: string) {
+        const updatedCharacters = characters.filter((c) => c.id !== characterId);
         setCharacters(updatedCharacters);
     }
 
     return <div className="w-full h-full flex flex-col gap-1 items-center border-1 border-border rounded-2xl p-1">
-        {characters.map((creature) =>
-            <div className="w-full p-1 rounded-lg" style={{backgroundColor: creature.color}}>
-                <Input key={creature.id} value={creature.name} autoFocus={true}
-                       onChange={(event) => updateCreature(creature, event.target.value)}></Input>
-            </div>
+        {characters.map((character) =>
+            <CharacterCard character={character} spotlightCharacter={spotlightCharacter}
+                           updateCharacter={updateCharacter} removeCharacter={removeCharacter}></CharacterCard>
         )}
         <span onClick={createCharacter}>+</span>
     </div>;
