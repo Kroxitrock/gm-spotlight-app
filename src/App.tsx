@@ -10,8 +10,8 @@ function App() {
     return (
         <div className="w-full h-screen flex flex-row gap-2 p-4">
             <ColorsProvider>
-                <SpotlightList prefix='Adversary' characters={adversaries} setCharacters={setAdversaries}></SpotlightList>
-                <SpotlightList prefix='Player' characters={players} setCharacters={setPlayers}></SpotlightList>
+                <SpotlightList type='Adversary' characters={adversaries} setCharacters={setAdversaries}></SpotlightList>
+                <SpotlightList type='Player' characters={players} setCharacters={setPlayers}></SpotlightList>
             </ColorsProvider>
         </div>
     );

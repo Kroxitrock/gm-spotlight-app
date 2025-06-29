@@ -3,20 +3,25 @@ import CharacterCard from '@/components/CharacterCard.tsx';
 import {useColors} from '@/lib/hooks/useColors.ts';
 
 interface SpotlightListProps {
-    prefix: string;
+    type: 'Adversary' | 'Player';
     characters: Character[];
     setCharacters: (newCharacters: Character[]) => void;
 }
 
-export default function SpotlightList({prefix, characters, setCharacters}: SpotlightListProps) {
+export default function SpotlightList({type, characters, setCharacters}: SpotlightListProps) {
     const {getNextColor} = useColors();
 
     function createCharacter() {
-        setCharacters([...characters, {
+        const oldCharacters = characters.map((character) => {
+            return {...character, editable: false};
+        });
+        oldCharacters.push({
             id: crypto.randomUUID(),
-            name: prefix + ' ' + (characters.length + 1),
+            name: type + ' ' + (characters.length + 1),
             color: getNextColor(),
-        }]);
+            editable: true
+        })
+        setCharacters(oldCharacters);
     }
 
     function spotlightCharacter(characterId: string) {
@@ -25,9 +30,10 @@ export default function SpotlightList({prefix, characters, setCharacters}: Spotl
         setCharacters(charactersCopy);
     }
 
-    function updateCharacter(characterId: string, value: string) {
+    function updateCharacter(characterId: string, value: Character) {
         const updatedCharacters = [...characters];
-        updatedCharacters.find((c) => c.id === characterId)!.name = value;
+        const oldCharacter = updatedCharacters.find((c) => c.id === characterId)!;
+        Object.assign(oldCharacter, value);
         setCharacters(updatedCharacters);
     }
 
@@ -39,7 +45,8 @@ export default function SpotlightList({prefix, characters, setCharacters}: Spotl
     return <div className="w-full h-full flex flex-col gap-1 items-center border-1 border-border rounded-2xl p-1">
         {characters.map((character) =>
             <CharacterCard character={character} spotlightCharacter={spotlightCharacter}
-                           updateCharacter={updateCharacter} removeCharacter={removeCharacter}></CharacterCard>
+                           updateCharacter={updateCharacter} removeCharacter={removeCharacter}
+                           key={character.id}></CharacterCard>
         )}
         <span onClick={createCharacter}>+</span>
     </div>;
