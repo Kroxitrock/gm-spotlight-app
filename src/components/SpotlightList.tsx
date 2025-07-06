@@ -1,9 +1,9 @@
-import type Character from '@/model/character.ts';
+import {type Character, CharacterType} from '@/model/character.ts';
 import CharacterCard from '@/components/CharacterCard.tsx';
 import {useColors} from '@/lib/hooks/useColors.ts';
 
 interface SpotlightListProps {
-    type: 'Adversary' | 'Player';
+    type: CharacterType;
     characters: Character[];
     setCharacters: (newCharacters: Character[]) => void;
 }
@@ -19,7 +19,8 @@ export default function SpotlightList({type, characters, setCharacters}: Spotlig
             id: crypto.randomUUID(),
             name: type + ' ' + (characters.length + 1),
             color: getNextColor(),
-            editable: true
+            editable: true,
+            type
         })
         setCharacters(oldCharacters);
     }
