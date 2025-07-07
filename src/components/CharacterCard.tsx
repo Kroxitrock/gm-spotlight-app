@@ -49,8 +49,9 @@ export default function CharacterCard({
 
     return <div
         className={`w-full flex flex-row gap-2 items-center p-3 rounded-lg relative cursor-pointer group hover:mt-1 hover:mb-1 border-8 ${characterStyle()}`}
-                onClick={() => spotlightCharacter(character.id)}>
-        <div className="hidden group-hover:flex absolute top-[-5px] right-[-3px]  flex-row space-between items-center gap-1">
+        onClick={() => spotlightCharacter(character.id)}>
+        <div
+            className="hidden group-hover:flex absolute top-[-5px] right-[-3px]  flex-row space-between items-center gap-1">
             <Badge className="rounded-full cursor-pointer px-1 h-5 min-w-5"
                    variant="default"
                    onClick={(event) => {
@@ -72,9 +73,9 @@ export default function CharacterCard({
         </div>
         <div className="h-full aspect-square rounded-full" style={{backgroundColor: character.color}}></div>
         {character.editable &&
-        <Input key={character.id} value={character.name} autoFocus={true} onKeyUp={handleKeyUp}
-               onClick={event => event.stopPropagation()}
-               onChange={handleTextChange} onBlur={handleBlur}></Input>}
+            <Input key={character.id} value={character.name} autoFocus={true} onKeyUp={handleKeyUp}
+                   onClick={event => event.stopPropagation()}
+                   onChange={handleTextChange} onBlur={handleBlur}></Input>}
         {!character.editable && <span className="text-lg font-bold">{character.name}</span>}
     </div>;
 }

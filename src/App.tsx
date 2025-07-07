@@ -1,6 +1,6 @@
 import SpotlightList from '@/components/SpotlightList.tsx';
 import {useState} from 'react';
-import type Character from '@/model/character.ts';
+import {type Character, CharacterType} from '@/model/character.ts';
 import {ColorsProvider} from '@/lib/providers/ColorsProvider.tsx';
 
 function App() {
@@ -10,8 +10,10 @@ function App() {
     return (
         <div className="w-full h-screen flex flex-row gap-2 p-4">
             <ColorsProvider>
-                <SpotlightList type='Adversary' characters={adversaries} setCharacters={setAdversaries}></SpotlightList>
-                <SpotlightList type='Player' characters={players} setCharacters={setPlayers}></SpotlightList>
+                <SpotlightList type={CharacterType.ADVERSARY} characters={adversaries}
+                               setCharacters={setAdversaries}></SpotlightList>
+                <SpotlightList type={CharacterType.PLAYER} characters={players}
+                               setCharacters={setPlayers}></SpotlightList>
             </ColorsProvider>
         </div>
     );

@@ -20,4 +20,4 @@ export function ColorsProvider({children}: ColorsProviderProps) {
             {children}
         </ColorsContext.Provider>
     );
-};
+}
