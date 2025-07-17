@@ -10,10 +10,8 @@
     --radius-xl: calc(var(--radius) + 4px);
     --color-player-background: var(--player-background);
     --color-player-border: var(--player-border);
-    --color-player-text: var(--player-text);
     --color-adversary-background: var(--adversary-background);
     --color-adversary-border: var(--adversary-border);
-    --color-adversary-text: var(--adversary-text);
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -48,15 +46,13 @@
 }
 
 :root {
-    --player-background: #E7C74B;
-    --player-border: #FDF691;
-    --player-text: #000000;
-    --adversary-background: #22135E;
-    --adversary-border: #1A1630;
-    --adversary-text: #FFFFFF;
+    --player-background: #FDF691;
+    --player-border: #E7C74B;
+    --adversary-background: #998FC7;
+    --adversary-border: #22135E;
     --radius: 0.625rem;
     --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    --foreground: #1A1630;
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
@@ -70,7 +66,7 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
+    --border: #C0C0C0;
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
     --chart-1: oklch(0.646 0.222 41.116);
