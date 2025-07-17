@@ -1,13 +1,14 @@
 {
   "name": "gm-spotlight-app",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "predeploy": "cp public/CNAME dist/CNAME",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

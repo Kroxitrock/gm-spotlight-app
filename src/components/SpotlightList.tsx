@@ -45,7 +45,8 @@ export default function SpotlightList({type, characters, setCharacters}: Spotlig
 
     return <div className="w-full h-full p-2 bg-border [clip-path:polygon(3%_0,0_3%,0_97%,3%_100%,97%_100%,100%_97%,100%_3%,97%_0)]">
         <div className="w-full h-full overflow-auto flex flex-col gap-2 items-center p-2 bg-background [clip-path:polygon(3%_0,0_3%,0_97%,3%_100%,97%_100%,100%_97%,100%_3%,97%_0)]">
-        {characters.map((character) =>
+        <div className="w-full flex flex-row justify-center text-3xl">{type === CharacterType.PLAYER ? "Players" : "Adversaries"}</div>
+            {characters.map((character) =>
             <CharacterCard character={character} spotlightCharacter={spotlightCharacter}
                            updateCharacter={updateCharacter} removeCharacter={removeCharacter}
                            key={character.id}></CharacterCard>
